@@ -7,6 +7,9 @@ import { globalStyles } from './utils/globalStyles';
 import { useAppDispatch, useAppSelector } from './utils/hooks';
 import Layout from './components/Layout';
 import Nav from './components/Nav';
+import { Container } from './stitches/Container';
+import { Flex } from './stitches/Flex';
+import { Box } from './stitches/Box';
 
 const App = () => {
   globalStyles();
@@ -16,10 +19,15 @@ const App = () => {
   return (
     <Layout>
       <Nav />
-      <button>New Hero</button>
-      <div>hero app</div>
-      <HeroCard heroId={heroBlue} />
-      <HeroCard heroId={heroRed} />
+      <Container variant={'responsive'}>
+        <Flex direction={'row'}>
+          <HeroCard heroId={heroBlue} />
+          <HeroCard heroId={heroRed} />
+        </Flex>
+        <Box
+          css={{ width: '$9', height: '$8', bg: '$attention9' }}
+        ></Box>
+      </Container>
       <Button shape='5' variant={'outline'}>
         <Text>Learn More</Text>
       </Button>
