@@ -5,6 +5,8 @@ import { Text } from './stitches/Text';
 import { useGetHeroByIdQuery } from './redux/slice/hero-api-slice';
 import { globalStyles } from './utils/globalStyles';
 import { useAppDispatch, useAppSelector } from './utils/hooks';
+import Layout from './components/Layout';
+import Nav from './components/Nav';
 
 const App = () => {
   globalStyles();
@@ -12,7 +14,8 @@ const App = () => {
   const [heroRed, setHeroRed] = useState<number>(30);
 
   return (
-    <div>
+    <Layout>
+      <Nav />
       <button>New Hero</button>
       <div>hero app</div>
       <HeroCard heroId={heroBlue} />
@@ -20,7 +23,7 @@ const App = () => {
       <Button shape='5' variant={'outline'}>
         <Text>Learn More</Text>
       </Button>
-    </div>
+    </Layout>
   );
 };
 
