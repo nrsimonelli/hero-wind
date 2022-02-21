@@ -16,6 +16,6 @@
 
 ### set up redux toolkit
 
-- [ ] yarn add @reduxjs/toolkit
+- [ ] yarn add @reduxjs/toolkit react-redux
 - [ ] redux and utils directories
 - [ ] configure store, create first slice file, create hooks file
