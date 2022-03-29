@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { heroApiSlice } from './slice/hero-api-slice';
+import heroDisplaySlice from './slice/hero-display-slice';
 
 export const store = configureStore({
   reducer: {
+    heroDisplay: heroDisplaySlice,
     [heroApiSlice.reducerPath]: heroApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {

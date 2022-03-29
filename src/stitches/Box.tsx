@@ -28,6 +28,5 @@ export const Box = styled('div', {
   },
   defaultVariants: {
     p: 0,
-    visible: 'true',
   },
 });

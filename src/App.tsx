@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import HeroCard from './components/HeroCard';
+import { GraphBar } from './components/HeroGraph';
 import { Button } from './stitches/Button';
 import { Text } from './stitches/Text';
-import { useGetHeroByIdQuery } from './redux/slice/hero-api-slice';
 import { globalStyles } from './utils/globalStyles';
-import { useAppDispatch, useAppSelector } from './utils/hooks';
+import { useAppSelector } from './utils/hooks';
 import Layout from './components/Layout';
 import Nav from './components/Nav';
 import { Container } from './stitches/Container';
 import { Flex } from './stitches/Flex';
-import { Box } from './stitches/Box';
 
 const App = () => {
   globalStyles();
-  const [heroBlue, setHeroBlue] = useState<number>(10);
-  const [heroRed, setHeroRed] = useState<number>(30);
+  const redHero = useAppSelector(
+    (state) => state.heroDisplay.redHero
+  );
+  const blueHero = useAppSelector(
+    (state) => state.heroDisplay.blueHero
+  );
+  const heroData = useAppSelector(
+    (state) => state.heroDisplay.heroData
+  );
 
   return (
     <Layout>
       <Nav />
       <Container variant={'responsive'}>
         <Flex direction={'row'}>
-          <HeroCard heroId={heroBlue} />
-          <HeroCard heroId={heroRed} />
+          <HeroCard hero={redHero} tag={'Red'} />
+          <HeroCard hero={blueHero} tag={'Blue'} />
         </Flex>
-        <Box
-          css={{ width: '$9', height: '$8', bg: '$attention9' }}
-        ></Box>
+        <Flex
+          direction={'column'}
+          justify={'center'}
+          css={{ minHeight: '30vh' }}
+        >
+          <GraphBar />
+        </Flex>
       </Container>
       <Button shape='5' variant={'outline'}>
         <Text>Learn More</Text>

@@ -11,6 +11,24 @@ export const SCREENS = {
   5: '1536px',
 } as const;
 
+export const STAT_OBJ = {
+  intelligence: 'intelligence',
+  strength: 'strength',
+  speed: 'speed',
+  durability: 'durability',
+  power: 'power',
+  combat: 'combat',
+} as const;
+
+export const STAT_KEYS = [
+  'intelligence',
+  'strength',
+  'speed',
+  'durability',
+  'power',
+  'combat',
+] as const;
+
 export const STATIC_RECORDS: Record[] = [
   { id: 1, name: 'A-Bomb' },
   { id: 2, name: 'Abe Sapien' },

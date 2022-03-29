@@ -58,6 +58,5 @@ export const Container = styled('div', {
   defaultVariants: {
     variant: 'full',
     px: 3,
-    visible: 'true',
   },
 });
