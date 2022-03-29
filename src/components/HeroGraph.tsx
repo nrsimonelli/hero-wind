@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -11,28 +11,20 @@ import {
   Bar,
   CartesianGrid,
 } from 'recharts';
-import { STAT_KEYS, STAT_OBJ } from '../constants';
-import { Hero } from '../redux/slice/hero-api-slice';
-import { Box } from '../stitches/Box';
+import { STAT_KEYS } from '../constants';
+import { Button } from '../stitches/Button';
+import { Text } from '../stitches/Text';
 import { Flex } from '../stitches/Flex';
 import { useAppSelector } from '../utils/hooks';
 
-type HeroProps = {
-  id: number;
-  name: string;
-};
-
-// interface GraphProps {
-//   redHero: HeroProps;
-//   blueHero: HeroProps;
-// }
-
-export const GraphBar = () => {
+export const HeroGraph = () => {
   const heroData = useAppSelector(
     (state) => state.heroDisplay.heroData
   );
   const redKey = heroData[0].name;
   const blueKey = heroData[1].name;
+
+  const [showAltGraph, setShowAltGraph] = useState<boolean>(false);
 
   const graphData: any[] = [];
 
@@ -44,13 +36,13 @@ export const GraphBar = () => {
     graphData.push(value);
   });
 
-  return (
-    <Flex
-      justify={'center'}
-      align={'center'}
-      css={{ height: '$full', width: '$full' }}
-    >
-      <BarChart width={600} height={300} data={graphData}>
+  const handleClick = () => {
+    setShowAltGraph(!showAltGraph);
+  };
+
+  const BarG = () => {
+    return (
+      <BarChart width={600} height={250} data={graphData}>
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='stat' />
         <YAxis />
@@ -69,34 +61,63 @@ export const GraphBar = () => {
           fillOpacity={0.8}
         />
       </BarChart>
+    );
+  };
+
+  const AreaG = () => {
+    return (
+      <AreaChart width={600} height={250} data={graphData}>
+        <defs>
+          <linearGradient id='colorA1' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor='#1890ff' stopOpacity={0.8} />
+            <stop offset='95%' stopColor='#1890ff' stopOpacity={0} />
+          </linearGradient>
+
+          <linearGradient id='colorB1' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor='#f5222d' stopOpacity={0.8} />
+            <stop offset='95%' stopColor='#f5222d' stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='stat' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Area
+          type='monotone'
+          dataKey={redKey}
+          stroke={'#f5222d'}
+          fillOpacity={1}
+          fill={'url(#colorB1)'}
+          activeDot={{ r: 6 }}
+        />
+        <Area
+          type='monotone'
+          dataKey={blueKey}
+          stroke={'#1890ff'}
+          fillOpacity={1}
+          fill={'url(#colorA1)'}
+          activeDot={{ r: 6 }}
+        />
+      </AreaChart>
+    );
+  };
+
+  return (
+    <Flex
+      justify={'center'}
+      align={'center'}
+      css={{ height: '$full', width: '$full' }}
+    >
+      <Button shape='5' variant={'outline'} onClick={handleClick}>
+        <Text>Switch</Text>
+      </Button>
+      {showAltGraph ? <BarG /> : <AreaG />}
     </Flex>
   );
 };
 
 export const GraphArea = () => {
-  // const heroOne = props.eggData[0];
-  // const heroTwo = props.eggData[1];
-  // const hero = props.eggData;
-
-  // const keys = [
-  //   'intelligence',
-  //   'strength',
-  //   'speed',
-  //   'durability',
-  //   'power',
-  //   'combat',
-  // ];
-
-  // const result = [];
-
-  // keys.forEach((stat) => {
-  //   const statScore = { stat };
-  //   hero.forEach((heroInfo) => {
-  //     statScore[heroInfo.name] = heroInfo[stat];
-  //   });
-  //   result.push(statScore);
-  // });
-
   return (
     <div className='graph'>
       <ResponsiveContainer height='100%' width='100%'>

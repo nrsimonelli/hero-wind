@@ -1,18 +1,16 @@
-import { Combobox } from '@headlessui/react';
-import { useEffect, useState } from 'react';
-import { STATIC_RECORDS } from '../constants';
+import React, { useEffect } from 'react';
 import { useGetHeroByIdQuery } from '../redux/slice/hero-api-slice';
-import { useAppDispatch, useAppSelector } from '../utils/hooks';
+import { useAppDispatch } from '../utils/hooks';
 import { styled } from '../stitches.config';
 import { Box } from '../stitches/Box';
 import { Flex } from '../stitches/Flex';
-import { Text } from '../stitches/Text';
 import { setHeroData } from '../redux/slice/hero-display-slice';
 import HeroSearch from './HeroSearch';
+import { Skeleton } from '../stitches/Skeleton';
 
 const Img = styled('img', {
   // css here
-  mt: '$3',
+  mt: '$4',
   borderRadius: '$3',
   width: '160px',
   height: '240px',
@@ -55,9 +53,7 @@ const HeroCard = ({
       css={{ width: '50%', mb: '$3' }}
     >
       {isLoading || isFetching ? (
-        <Box css={{ height: '240px', width: '160px', bg: '$base5' }}>
-          Loading
-        </Box>
+        <Skeleton />
       ) : (
         <Img src={data?.images.sm} />
       )}

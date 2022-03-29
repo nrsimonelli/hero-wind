@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HeroCard from './components/HeroCard';
-import { GraphBar } from './components/HeroGraph';
+import { HeroGraph } from './components/HeroGraph';
 import { Button } from './stitches/Button';
 import { Text } from './stitches/Text';
 import { globalStyles } from './utils/globalStyles';
@@ -30,17 +30,8 @@ const App = () => {
           <HeroCard hero={redHero} tag={'Red'} />
           <HeroCard hero={blueHero} tag={'Blue'} />
         </Flex>
-        <Flex
-          direction={'column'}
-          justify={'center'}
-          css={{ minHeight: '30vh' }}
-        >
-          <GraphBar />
-        </Flex>
+        <HeroGraph />
       </Container>
-      <Button shape='5' variant={'outline'}>
-        <Text>Learn More</Text>
-      </Button>
     </Layout>
   );
 };
