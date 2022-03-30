@@ -17,7 +17,10 @@ const InputStyle = styled(Box, {
   position: 'relative',
   bg: '$base1',
   textAlign: 'left',
-  width: '$full',
+  width: '160px',
+  '@bp4': {
+    width: '320px',
+  },
   borderRadius: '$3',
   cursor: 'default',
   boxShadow:

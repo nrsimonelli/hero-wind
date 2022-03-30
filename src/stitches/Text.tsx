@@ -109,7 +109,4 @@ export const Text = styled('span', {
       },
     },
   },
-  defaultVariants: {
-    variant: 'default',
-  },
 });

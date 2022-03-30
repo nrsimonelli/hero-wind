@@ -18,20 +18,30 @@ const App = () => {
   const blueHero = useAppSelector(
     (state) => state.heroDisplay.blueHero
   );
-  const heroData = useAppSelector(
-    (state) => state.heroDisplay.heroData
-  );
 
   return (
     <Layout>
       <Nav />
-      <Container variant={'responsive'}>
-        <Flex direction={'row'}>
+      <Flex
+        direction={{ '@initial': 'column', '@bp4': 'row' }}
+        align={'center'}
+        justify={'start'}
+        wrap={'wrap'}
+        css={{
+          flex: '1 0 auto',
+          width: '100%',
+        }}
+      >
+        <Flex
+          css={{
+            mx: '$3',
+          }}
+        >
           <HeroCard hero={redHero} tag={'Red'} />
           <HeroCard hero={blueHero} tag={'Blue'} />
         </Flex>
         <HeroGraph />
-      </Container>
+      </Flex>
     </Layout>
   );
 };

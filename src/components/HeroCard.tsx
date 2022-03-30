@@ -14,7 +14,12 @@ const Img = styled('img', {
   borderRadius: '$3',
   width: '160px',
   height: '240px',
-  boxShadow: '$3',
+  boxShadow:
+    '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+  '@bp4': {
+    width: '320px',
+    height: '480px',
+  },
 });
 
 interface HeroProps {
@@ -48,14 +53,17 @@ const HeroCard = ({
 
   return (
     <Flex
-      direction={'column'}
+      direction={{ '@initial': 'column', '@bp4': 'columnReverse' }}
       align={'center'}
-      css={{ width: '50%', mb: '$3' }}
+      justify={'start'}
+      css={{
+        px: '$3',
+      }}
     >
       {isLoading || isFetching ? (
         <Skeleton />
       ) : (
-        <Img src={data?.images.sm} />
+        <Img src={data?.images.md} />
       )}
       <HeroSearch hero={hero} tag={tag} />
     </Flex>

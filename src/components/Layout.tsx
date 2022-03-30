@@ -6,7 +6,8 @@ const Layout = ({ children }: any) => {
       direction={'column'}
       justify={'start'}
       align={'center'}
-      css={{ minHeight: '$vh' }}
+      wrap={'wrap'}
+      css={{ minHeight: '$vh', width: '100%' }}
     >
       {children}
     </Flex>

@@ -16,6 +16,7 @@ import { Button } from '../stitches/Button';
 import { Text } from '../stitches/Text';
 import { Flex } from '../stitches/Flex';
 import { useAppSelector } from '../utils/hooks';
+import { Box } from '../stitches/Box';
 
 export const HeroGraph = () => {
   const heroData = useAppSelector(
@@ -42,86 +43,34 @@ export const HeroGraph = () => {
 
   const BarG = () => {
     return (
-      <BarChart width={600} height={250} data={graphData}>
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='stat' />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar
-          type='monotone'
-          dataKey={redKey}
-          fill={'#f5222d'}
-          fillOpacity={0.8}
-        />
-        <Bar
-          type='monotone'
-          dataKey={blueKey}
-          fill={'#1890ff'}
-          fillOpacity={0.8}
-        />
-      </BarChart>
+      <ResponsiveContainer height={'100%'} width={'100%'}>
+        <BarChart data={graphData}>
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='stat' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar
+            type='monotone'
+            dataKey={redKey}
+            fill={'#f5222d'}
+            fillOpacity={0.8}
+          />
+          <Bar
+            type='monotone'
+            dataKey={blueKey}
+            fill={'#1890ff'}
+            fillOpacity={0.8}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     );
   };
 
   const AreaG = () => {
     return (
-      <AreaChart width={600} height={250} data={graphData}>
-        <defs>
-          <linearGradient id='colorA1' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#1890ff' stopOpacity={0.8} />
-            <stop offset='95%' stopColor='#1890ff' stopOpacity={0} />
-          </linearGradient>
-
-          <linearGradient id='colorB1' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#f5222d' stopOpacity={0.8} />
-            <stop offset='95%' stopColor='#f5222d' stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='stat' />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Area
-          type='monotone'
-          dataKey={redKey}
-          stroke={'#f5222d'}
-          fillOpacity={1}
-          fill={'url(#colorB1)'}
-          activeDot={{ r: 6 }}
-        />
-        <Area
-          type='monotone'
-          dataKey={blueKey}
-          stroke={'#1890ff'}
-          fillOpacity={1}
-          fill={'url(#colorA1)'}
-          activeDot={{ r: 6 }}
-        />
-      </AreaChart>
-    );
-  };
-
-  return (
-    <Flex
-      justify={'center'}
-      align={'center'}
-      css={{ height: '$full', width: '$full' }}
-    >
-      <Button shape='5' variant={'outline'} onClick={handleClick}>
-        <Text>Switch</Text>
-      </Button>
-      {showAltGraph ? <BarG /> : <AreaG />}
-    </Flex>
-  );
-};
-
-export const GraphArea = () => {
-  return (
-    <div className='graph'>
-      <ResponsiveContainer height='100%' width='100%'>
-        <AreaChart width={500} height={400} data={[]}>
+      <ResponsiveContainer height={'100%'} width={'100%'}>
+        <AreaChart data={graphData}>
           <defs>
             <linearGradient id='colorA1' x1='0' y1='0' x2='0' y2='1'>
               <stop
@@ -156,22 +105,77 @@ export const GraphArea = () => {
           <Legend />
           <Area
             type='monotone'
-            dataKey={''}
-            stroke={'#1890ff'}
-            fillOpacity={1}
-            fill={'url(#colorA1)'}
-            activeDot={{ r: 6 }}
-          />
-          <Area
-            type='monotone'
-            dataKey={''}
+            dataKey={redKey}
             stroke={'#f5222d'}
             fillOpacity={1}
             fill={'url(#colorB1)'}
             activeDot={{ r: 6 }}
           />
+          <Area
+            type='monotone'
+            dataKey={blueKey}
+            stroke={'#1890ff'}
+            fillOpacity={1}
+            fill={'url(#colorA1)'}
+            activeDot={{ r: 6 }}
+          />
         </AreaChart>
       </ResponsiveContainer>
-    </div>
+    );
+  };
+
+  const navH = '64px';
+  const heroH = '337px';
+
+  return (
+    <Flex
+      direction={{
+        '@initial': 'rowReverse',
+        '@bp4': 'column',
+      }}
+      align={'center'}
+      justify={'center'}
+      css={{
+        flex: '1 0 auto',
+        width: '100%',
+        pr: '$3',
+        '@bp4': {
+          width: '50%',
+          mt: '100px',
+        },
+      }}
+    >
+      <Button
+        shape='5'
+        variant={'outline'}
+        onClick={handleClick}
+        size={{ '@initial': '1', '@bp4': '2' }}
+        css={{
+          '@bp4': {
+            position: 'relative',
+            bottom: 32,
+          },
+        }}
+      >
+        <Text>{showAltGraph ? 'Area' : 'Bar'}</Text>
+      </Button>
+      <Flex
+        align={'center'}
+        justify={'end'}
+        css={{
+          width: '100%',
+          pt: '$3',
+          pr: '$3',
+          height: `calc(100vh - ${navH} - ${heroH})`,
+          '@bp4': {
+            height: '500px',
+            pt: 0,
+            width: '100%',
+          },
+        }}
+      >
+        {showAltGraph ? <AreaG /> : <BarG />}
+      </Flex>
+    </Flex>
   );
 };
