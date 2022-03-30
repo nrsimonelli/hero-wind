@@ -48,8 +48,6 @@ export interface Hero {
   };
 }
 
-type HeroResponse = Hero[];
-
 export const heroApiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({

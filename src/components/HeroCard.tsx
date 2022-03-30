@@ -39,16 +39,10 @@ const HeroCard = ({
   );
 
   useEffect(() => {
-    console.log('in UE');
     if (data && !isLoading) {
-      console.log('firing dispatch');
       dispatch(setHeroData({ tag, data }));
     }
   }, [isLoading, data]);
-
-  useEffect(() => {
-    console.log('FETCHING');
-  }, [isFetching]);
 
   return (
     <Flex

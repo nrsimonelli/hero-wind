@@ -5,7 +5,7 @@ import { getHeroData } from '../redux/slice/hero-display-slice';
 import { styled } from '../stitches.config';
 import { Box } from '../stitches/Box';
 import { useAppDispatch } from '../utils/hooks';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { SelectorIcon } from '@heroicons/react/solid';
 
 interface HeroProps {
   id: number;
@@ -51,12 +51,9 @@ const InputStyle = styled(Box, {
   },
 });
 
-//"absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-
 const OptionsStyle = styled(Box, {
   position: 'relative',
   mt: '$1',
-  // width: '160px',
   [`& > .combo-options`]: {
     width: '$full',
     position: 'absolute',
@@ -79,14 +76,11 @@ const OptionsStyle = styled(Box, {
     //color: '$white',
   },
   [`& > .combo-options > .option-active`]: {
-    // px: '$1',
     bg: '$main9',
     color: '$white',
   },
-  // cursor-default select-none relative py-2 px-4 text-gray-700
   [`& > .combo-options > .option-empty`]: {
     pl: '$4',
-    //color: '$white',
   },
 
   ['& .entry']: {

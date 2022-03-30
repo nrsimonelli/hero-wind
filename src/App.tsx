@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HeroCard from './components/HeroCard';
 import { HeroGraph } from './components/HeroGraph';
-import { Button } from './stitches/Button';
-import { Text } from './stitches/Text';
 import { globalStyles } from './utils/globalStyles';
 import { useAppSelector } from './utils/hooks';
 import Layout from './components/Layout';

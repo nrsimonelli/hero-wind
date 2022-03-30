@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Hero, useGetHeroByIdQuery } from './hero-api-slice';
+import { createSlice } from '@reduxjs/toolkit';
+import { Hero } from './hero-api-slice';
 
 const getInitialRed = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
