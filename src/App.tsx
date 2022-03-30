@@ -7,7 +7,6 @@ import { globalStyles } from './utils/globalStyles';
 import { useAppSelector } from './utils/hooks';
 import Layout from './components/Layout';
 import Nav from './components/Nav';
-import { Container } from './stitches/Container';
 import { Flex } from './stitches/Flex';
 
 const App = () => {
@@ -26,9 +25,8 @@ const App = () => {
         direction={{ '@initial': 'column', '@bp4': 'row' }}
         align={'center'}
         justify={'start'}
-        wrap={'wrap'}
+        wrap={'noWrap'}
         css={{
-          flex: '1 0 auto',
           width: '100%',
         }}
       >

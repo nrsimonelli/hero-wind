@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useGetHeroByIdQuery } from '../redux/slice/hero-api-slice';
 import { useAppDispatch } from '../utils/hooks';
 import { styled } from '../stitches.config';
-import { Box } from '../stitches/Box';
 import { Flex } from '../stitches/Flex';
 import { setHeroData } from '../redux/slice/hero-display-slice';
 import HeroSearch from './HeroSearch';

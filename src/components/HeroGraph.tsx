@@ -16,7 +16,7 @@ import { Button } from '../stitches/Button';
 import { Text } from '../stitches/Text';
 import { Flex } from '../stitches/Flex';
 import { useAppSelector } from '../utils/hooks';
-import { Box } from '../stitches/Box';
+import { SCREENS } from '../constants';
 
 export const HeroGraph = () => {
   const heroData = useAppSelector(
@@ -136,12 +136,12 @@ export const HeroGraph = () => {
       align={'center'}
       justify={'center'}
       css={{
-        flex: '1 0 auto',
         width: '100%',
         pr: '$3',
+        overflow: 'hidden',
         '@bp4': {
-          width: '50%',
-          mt: '100px',
+          height: `calc(100vh - ${navH})`,
+          py: '$3',
         },
       }}
     >
@@ -153,7 +153,7 @@ export const HeroGraph = () => {
         css={{
           '@bp4': {
             position: 'relative',
-            bottom: 32,
+            mb: 16,
           },
         }}
       >
@@ -161,14 +161,17 @@ export const HeroGraph = () => {
       </Button>
       <Flex
         align={'center'}
-        justify={'end'}
+        justify={'center'}
+        wrap={'noWrap'}
         css={{
-          width: '100%',
+          flex: '1 1 auto',
+          width: 'auto',
+          maxWidth: `${SCREENS[2]}`,
           pt: '$3',
           pr: '$3',
           height: `calc(100vh - ${navH} - ${heroH})`,
           '@bp4': {
-            height: '500px',
+            maxHeight: '460px',
             pt: 0,
             width: '100%',
           },
