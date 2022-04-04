@@ -34,6 +34,10 @@ export const Skeleton = styled('div', {
         width: '160px',
         height: '240px',
         boxShadow: '$3',
+        '@bp4': {
+          width: '320px',
+          height: '480px',
+        },
       },
     },
   },

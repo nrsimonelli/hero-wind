@@ -25,7 +25,7 @@ const App = () => {
         justify={'start'}
         wrap={'noWrap'}
         css={{
-          width: '100%',
+          width: '$full',
         }}
       >
         <Flex

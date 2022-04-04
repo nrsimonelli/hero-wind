@@ -17,6 +17,9 @@ import { Text } from '../stitches/Text';
 import { Flex } from '../stitches/Flex';
 import { useAppSelector } from '../utils/hooks';
 import { SCREENS } from '../constants';
+import { theme } from '../stitches.config';
+
+const BLUE = theme.colors.blue9.value;
 
 export const HeroGraph = () => {
   const heroData = useAppSelector(
@@ -59,7 +62,7 @@ export const HeroGraph = () => {
           <Bar
             type='monotone'
             dataKey={blueKey}
-            fill={'#1890ff'}
+            fill={'hsl(206, 100%, 50%)'}
             fillOpacity={0.8}
           />
         </BarChart>
@@ -75,12 +78,12 @@ export const HeroGraph = () => {
             <linearGradient id='colorA1' x1='0' y1='0' x2='0' y2='1'>
               <stop
                 offset='5%'
-                stopColor='#1890ff'
+                stopColor='hsl(206, 100%, 50%)'
                 stopOpacity={0.8}
               />
               <stop
                 offset='95%'
-                stopColor='#1890ff'
+                stopColor='hsl(206, 100%, 50%)'
                 stopOpacity={0}
               />
             </linearGradient>
@@ -114,7 +117,7 @@ export const HeroGraph = () => {
           <Area
             type='monotone'
             dataKey={blueKey}
-            stroke={'#1890ff'}
+            stroke={'hsl(206, 100%, 50%)'}
             fillOpacity={1}
             fill={'url(#colorA1)'}
             activeDot={{ r: 6 }}
@@ -136,7 +139,7 @@ export const HeroGraph = () => {
       align={'center'}
       justify={'center'}
       css={{
-        width: '100%',
+        width: '$full',
         pr: '$3',
         overflow: 'hidden',
         '@bp4': {
@@ -173,7 +176,7 @@ export const HeroGraph = () => {
           '@bp4': {
             maxHeight: '460px',
             pt: 0,
-            width: '100%',
+            width: '$full',
           },
         }}
       >

@@ -7,7 +7,7 @@ const Layout = ({ children }: any) => {
       justify={'start'}
       align={'center'}
       wrap={'wrap'}
-      css={{ minHeight: '$vh', width: '100%' }}
+      css={{ minHeight: '$vh', width: '$full' }}
     >
       {children}
     </Flex>
