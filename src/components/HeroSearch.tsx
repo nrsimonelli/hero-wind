@@ -4,8 +4,11 @@ import { STATIC_RECORDS } from '../constants';
 import { getHeroData } from '../redux/slice/hero-display-slice';
 import { styled } from '../stitches.config';
 import { Box } from '../stitches/Box';
+import { Button } from '../stitches/Button';
 import { useAppDispatch } from '../utils/hooks';
 import { SelectorIcon } from '@heroicons/react/solid';
+import { ShuffleIcon } from '@radix-ui/react-icons';
+import { Flex } from '../stitches/Flex';
 
 interface HeroProps {
   id: number;
@@ -17,10 +20,6 @@ const InputStyle = styled(Box, {
   position: 'relative',
   bg: '$base1',
   textAlign: 'left',
-  width: '160px',
-  '@bp4': {
-    width: '320px',
-  },
   borderRadius: '$3',
   cursor: 'default',
   boxShadow:
@@ -54,6 +53,7 @@ const InputStyle = styled(Box, {
 const OptionsStyle = styled(Box, {
   position: 'relative',
   mt: '$1',
+  width: '$full',
   [`& > .combo-options`]: {
     width: '$full',
     position: 'absolute',
@@ -102,8 +102,14 @@ const HeroSearch = ({
   const [searchQuery, setSearchQuery] = useState('');
   const dispatch = useAppDispatch();
 
+  const isRed = tag === 'Red';
+
   const handleChange = (newHero: HeroProps) => {
     dispatch(getHeroData({ tag, newHero }));
+  };
+
+  const handleShuffle = () => {
+    console.log('random clicked');
   };
 
   const filteredRecords =
@@ -117,7 +123,29 @@ const HeroSearch = ({
         });
 
   return (
-    <Box css={{ mt: '$3' }}>
+    <Flex
+      css={{
+        mt: '$3',
+        width: '160px',
+        '@bp4': {
+          width: '320px',
+        },
+      }}
+    >
+      <Button
+        variant={isRed ? 'accent' : 'primary'}
+        shape={'3'}
+        size={'1'}
+        css={{
+          mt: '$1',
+          mr: '$1',
+          px: '$2',
+          width: 'min-content',
+        }}
+        onClick={handleShuffle}
+      >
+        <ShuffleIcon />
+      </Button>
       <Combobox value={hero} onChange={handleChange}>
         <OptionsStyle>
           <InputStyle>
@@ -159,7 +187,7 @@ const HeroSearch = ({
           </Transition>
         </OptionsStyle>
       </Combobox>
-    </Box>
+    </Flex>
   );
 };
 

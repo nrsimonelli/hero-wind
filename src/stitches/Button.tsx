@@ -37,6 +37,15 @@ export const Button = styled('button', {
   $$bc10: '$colors$blue10',
   $$bc11: '$colors$blue11',
 
+  $$ac4: '$colors$red4',
+  $$ac5: '$colors$red5',
+  $$ac6: '$colors$red6',
+  $$ac7: '$colors$red7',
+  $$ac8: '$colors$red8',
+  $$ac9: '$colors$red9',
+  $$ac10: '$colors$red10',
+  $$ac11: '$colors$red11',
+
   variants: {
     variant: {
       primary: {
@@ -71,6 +80,16 @@ export const Button = styled('button', {
         },
         '&:focus': {
           boxShadow: 'inset 0 0 0 1px $$bc9, 0 0 0 1px $$bc9',
+        },
+      },
+      accent: {
+        color: '$white',
+        backgroundColor: '$$ac9',
+        '&:hover': {
+          backgroundColor: '$$ac10',
+        },
+        '&:active': {
+          backgroundColor: '$$ac9',
         },
       },
     },
