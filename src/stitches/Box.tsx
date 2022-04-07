@@ -1,4 +1,4 @@
-import { styled } from '../stitches.config';
+import { styled } from '../stitches.config'
 
 export const Box = styled('div', {
   // local resets here
@@ -29,4 +29,4 @@ export const Box = styled('div', {
   defaultVariants: {
     p: 0,
   },
-});
+})

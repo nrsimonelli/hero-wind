@@ -80,11 +80,11 @@ const OptionsStyle = styled(Box, {
     color: '$white',
   },
   [`& > .combo-options > .option-empty`]: {
-    pl: '$4',
+    pl: '$2',
   },
 
   ['& .entry']: {
-    pl: '$4',
+    pl: '$2',
     display: 'block',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -109,7 +109,9 @@ const HeroSearch = ({
   };
 
   const handleShuffle = () => {
-    console.log('random clicked');
+    const index = Math.floor(Math.random() * STATIC_RECORDS.length);
+    const newHero = STATIC_RECORDS[index];
+    dispatch(getHeroData({ tag, newHero }));
   };
 
   const filteredRecords =
@@ -140,7 +142,10 @@ const HeroSearch = ({
           mt: '$1',
           mr: '$1',
           px: '$2',
+          py: '$1',
           width: 'min-content',
+          boxShadow:
+            '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         }}
         onClick={handleShuffle}
       >

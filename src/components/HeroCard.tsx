@@ -6,7 +6,6 @@ import { Flex } from '../stitches/Flex';
 import { setHeroData } from '../redux/slice/hero-display-slice';
 import HeroSearch from './HeroSearch';
 import { Skeleton } from '../stitches/Skeleton';
-import { Box } from '../stitches/Box';
 
 const Img = styled('img', {
   // css here
