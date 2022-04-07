@@ -24,7 +24,6 @@ const InputStyle = styled(Box, {
   cursor: 'default',
   boxShadow:
     '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-
   [`& > .combo-input`]: {
     py: '$2',
     pl: '$2',
@@ -71,10 +70,6 @@ const OptionsStyle = styled(Box, {
     cursor: 'default',
     select: 'none',
   },
-  [`& > .combo-options > .option-default`]: {
-    // px: '$1',
-    //color: '$white',
-  },
   [`& > .combo-options > .option-active`]: {
     bg: '$main9',
     color: '$white',
@@ -82,7 +77,6 @@ const OptionsStyle = styled(Box, {
   [`& > .combo-options > .option-empty`]: {
     pl: '$2',
   },
-
   ['& .entry']: {
     pl: '$2',
     display: 'block',
