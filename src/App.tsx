@@ -6,6 +6,8 @@ import { useAppSelector } from './utils/hooks';
 import Layout from './components/Layout';
 import Nav from './components/Nav';
 import { Flex } from './stitches/Flex';
+import HeroInfo from './components/HeroInfo';
+import { Dialog as ModalRoot } from '@radix-ui/react-dialog';
 
 const App = () => {
   globalStyles();

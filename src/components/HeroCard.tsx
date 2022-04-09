@@ -6,6 +6,11 @@ import { Flex } from '../stitches/Flex';
 import { setHeroData } from '../redux/slice/hero-display-slice';
 import HeroSearch from './HeroSearch';
 import { Skeleton } from '../stitches/Skeleton';
+import { Box } from '../stitches/Box';
+import { RiInformationFill } from 'react-icons/ri';
+import { DialogTrigger as ModalTrigger } from '@radix-ui/react-dialog';
+import { Dialog as ModalRoot } from '@radix-ui/react-dialog';
+import HeroInfo from './HeroInfo';
 
 const Img = styled('img', {
   // css here
@@ -44,6 +49,8 @@ const HeroCard = ({
     }
   }, [isLoading, data]);
 
+  const isRed = tag === 'Red';
+
   return (
     <Flex
       direction={{ '@initial': 'column', '@bp4': 'columnReverse' }}
@@ -51,14 +58,60 @@ const HeroCard = ({
       justify={'start'}
       css={{
         px: '$3',
+        // border: '1px solid blue',
+        position: 'relative',
       }}
     >
-      {isLoading || isFetching ? (
-        <Skeleton />
-      ) : (
-        <Img src={data?.images.md} />
-      )}
-      <HeroSearch hero={hero} tag={tag} />
+      <ModalRoot>
+        {isLoading || isFetching ? (
+          <Skeleton />
+        ) : (
+          <>
+            <Img src={data?.images.md} />
+            <ModalTrigger asChild>
+              <Box
+                css={{
+                  position: 'absolute',
+                  right: '18px',
+                  top: '22px',
+                  fontSize: '$4',
+                  '@bp4': {
+                    fontSize: '$5',
+                    top: 'auto',
+                    right: '20px',
+                    bottom: '-8px',
+                  },
+                  ['& .icon-blue']: {
+                    color: '$main9',
+                    borderRadius: '$5',
+                    boxShadow: '$3',
+                    bg: '$white',
+                    '&:hover': {
+                      color: '$main10',
+                    },
+                  },
+                  ['& .icon-red']: {
+                    color: '$danger9',
+                    borderRadius: '$5',
+                    boxShadow: '$3',
+                    bg: '$white',
+                    '&:hover': {
+                      color: '$danger10',
+                    },
+                  },
+                  // color: 'transparent',
+                }}
+              >
+                <RiInformationFill
+                  className={isRed ? 'icon-red' : 'icon-blue'}
+                />
+              </Box>
+            </ModalTrigger>
+          </>
+        )}
+        <HeroSearch hero={hero} tag={tag} />
+        <HeroInfo tag={tag} />
+      </ModalRoot>
     </Flex>
   );
 };
