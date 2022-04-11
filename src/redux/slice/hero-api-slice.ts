@@ -2,6 +2,7 @@ import {
   createApi,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
+import 'dotenv/config';
 
 export interface Hero {
   id: number;
@@ -51,7 +52,7 @@ export interface Hero {
 export const heroApiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://akabab.github.io/superhero-api/api/',
+    baseUrl: process.env.API_KEY,
   }),
   endpoints: (builder) => ({
     getHeroById: builder.query<Hero, number>({

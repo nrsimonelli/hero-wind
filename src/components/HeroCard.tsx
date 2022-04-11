@@ -58,7 +58,6 @@ const HeroCard = ({
       justify={'start'}
       css={{
         px: '$3',
-        // border: '1px solid blue',
         position: 'relative',
       }}
     >
@@ -99,7 +98,6 @@ const HeroCard = ({
                       color: '$danger10',
                     },
                   },
-                  // color: 'transparent',
                 }}
               >
                 <RiInformationFill

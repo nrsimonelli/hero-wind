@@ -3,11 +3,11 @@ import { styled, keyframes } from '../stitches.config';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Flex } from '../stitches/Flex';
-import { Hero } from '../redux/slice/hero-api-slice';
 import { useAppSelector } from '../utils/hooks';
 import { Button } from '../stitches/Button';
 import { Box } from '../stitches/Box';
 import { Text } from '../stitches/Text';
+import HeroInfoAvatar from './HeroInfoAvatar';
 
 const overlayShow = keyframes({
   '0%': { opacity: 0 },
@@ -62,14 +62,16 @@ function Content({
 }
 
 const StyledTitle = styled(DialogPrimitive.Title, {
-  margin: 0,
+  ml: '$3',
+  mb: 0,
   fontWeight: 500,
   color: '$base12',
   fontSize: 17,
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
-  margin: '10px 0 20px',
+  mt: '$0',
+  ml: '$3',
   color: '$base11',
   fontSize: 15,
   lineHeight: 1.5,
@@ -117,46 +119,149 @@ const HeroInfo = ({ tag }: { tag: 'Red' | 'Blue' }) => {
     { label: 'combat', abbr: 'Com', color: 'attention' },
   ];
 
+  const aliasList = () => {
+    const array = hero.biography.aliases ?? ['-'];
+    const length = array.length;
+    const ifNone = `Commonly known as ${hero.name}`;
+    const ifOne = `Also known as ${hero.name}`;
+
+    if (!length || array[0] === '-') {
+      return ifNone;
+    }
+    if (length === 1) {
+      return ifOne;
+    }
+    if (length === 2) {
+      return `Also known as ${array.join(' & ')}`;
+    }
+    if (length >= 3) {
+      return `Also known as ${array
+        .join(', ')
+        .replace(/, ([^,]*)$/, ' & $1')}`;
+    }
+  };
+
+  const initials = (): string => {
+    const x = hero.name;
+    if (x.split(' ').length < 2) {
+      return x.slice(0, 2);
+    }
+    const letters = x
+      .split(' ')
+      .map((name: any[]) => name[0])
+      .join('');
+    return letters;
+  };
+
+  const height = hero.appearance.height
+    ? hero.appearance.height[0]
+    : 'Unknown';
+  const weight = hero.appearance.weight
+    ? hero.appearance.weight[0]
+    : 'Unknown';
+  const origin = hero.biography.placeOfBirth || 'Unknown';
+  const intro = hero.biography.firstAppearance || 'Unknown';
+  const publisher = hero.biography.publisher || 'Unknown';
+
+  const BioText = styled(Text, {
+    fontSize: '$1',
+    lineHeight: '$2',
+  });
+
   return (
     <DialogContent>
-      {/* {JSON.stringify(hero)} */}
-      <DialogTitle>{hero?.name}</DialogTitle>
-      <DialogDescription>subtext</DialogDescription>
-      {STAT_STYLE.map((entry, index) => (
-        <Flex key={entry.label} direction={'row'} align={'center'}>
-          <Text size={'1'} css={{ width: '60px', lineHeight: '$2' }}>
-            {entry.abbr}
-          </Text>
-          <Flex
-            css={{
-              width: '100%',
-              bg: `$${entry.color}4`,
-              borderRadius: '$4',
-            }}
-          >
-            <Box
-              css={{
-                bg: `$${entry.color}9`,
-                width: `${hero?.powerstats[entry.label]}%`,
-                height: '8px',
-                borderRadius: '$4',
-              }}
-            ></Box>
+      {!heroData ? (
+        'Loading'
+      ) : (
+        <>
+          <Flex direction={'row'} align={'center'}>
+            <HeroInfoAvatar
+              image={hero.images.sm}
+              altText={hero.name}
+              fallback={initials}
+            />
+            <Flex
+              direction={'column'}
+              align={'start'}
+              css={{ width: '$full' }}
+            >
+              <DialogTitle>
+                {hero.biography.fullName || hero.name}
+              </DialogTitle>
+              <DialogDescription>{aliasList()}</DialogDescription>
+            </Flex>
           </Flex>
-        </Flex>
-      ))}
-      <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
-        <DialogClose asChild>
-          <Button aria-label='Close' variant={'primary'}>
-            Return
-          </Button>
-        </DialogClose>
-      </Flex>
-      <DialogClose asChild>
-        <IconButton>
-          <Cross2Icon />
-        </IconButton>
-      </DialogClose>
+
+          <Flex direction={'row'} css={{ mt: '$3' }}>
+            <Box css={{ width: '50%', pr: '$3' }}>
+              <BioText>
+                <b>Origin:</b>{' '}
+                {origin === '-' || 0 ? 'Unknown' : origin}
+              </BioText>
+              <BioText>
+                <b>Introduction:</b>{' '}
+                {intro === '-' || 0 ? 'Unknown' : intro}
+              </BioText>
+              <BioText>
+                <b>Publisher:</b>{' '}
+                {publisher === '-' || 0 ? 'Unknown' : publisher}
+              </BioText>
+              <BioText>
+                <b>Height:</b>{' '}
+                {height === '-' || 0 ? 'Unknown' : height}
+              </BioText>
+              <BioText>
+                <b>Weight:</b>{' '}
+                {weight === '- lb' || 0 ? 'Unknown' : weight}
+              </BioText>
+            </Box>
+            <Box css={{ width: '50%' }}>
+              {STAT_STYLE.map((entry, index) => (
+                <Flex
+                  key={entry.label}
+                  direction={'row'}
+                  align={'center'}
+                >
+                  <Text
+                    size={'1'}
+                    css={{ width: '60px', lineHeight: '$2' }}
+                  >
+                    {entry.abbr}
+                  </Text>
+                  <Flex
+                    css={{
+                      width: '100%',
+                      bg: `$${entry.color}4`,
+                      borderRadius: '$4',
+                    }}
+                  >
+                    <Box
+                      css={{
+                        bg: `$${entry.color}9`,
+                        width: `${hero?.powerstats[entry.label]}%`,
+                        height: '8px',
+                        borderRadius: '$4',
+                      }}
+                    ></Box>
+                  </Flex>
+                </Flex>
+              ))}
+            </Box>
+          </Flex>
+          <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
+            <DialogClose asChild>
+              <Button aria-label='Close' variant={'primary'}>
+                Return
+              </Button>
+            </DialogClose>
+          </Flex>
+          <DialogClose asChild>
+            <IconButton>
+              <Cross2Icon />
+            </IconButton>
+          </DialogClose>
+        </>
+      )}
     </DialogContent>
   );
 };

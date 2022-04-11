@@ -8,7 +8,7 @@ const getInitialRed = () => {
       return JSON.parse(storedRed);
     }
   }
-  return { id: 97, name: 'Black Canary' };
+  return { id: 423, name: 'Magneto' };
 };
 
 const getInitialBlue = () => {
@@ -18,7 +18,7 @@ const getInitialBlue = () => {
       return JSON.parse(storedBlue);
     }
   }
-  return { id: 42, name: 'Ardina' };
+  return { id: 523, name: 'Polaris' };
 };
 
 type HeroT = Hero[];

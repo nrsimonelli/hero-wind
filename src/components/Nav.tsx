@@ -16,16 +16,31 @@ const Nav = () => {
     >
       <Container variant={'responsive'}>
         <Flex direction={'row'} justify={'between'}>
-          <Text variant={'h1'}>Power Stats</Text>
-          <Flex justify={'center'} align={'center'}>
+          <Text variant={'h1'} css={{ userSelect: 'none' }}>
+            Power Stats
+          </Text>
+          <Flex
+            direction={'column'}
+            justify={'center'}
+            align={'center'}
+            css={{
+              [`& > a`]: {
+                height: 30,
+                width: 30,
+                '&:hover': {
+                  color: '$whiteA11',
+                },
+              },
+            }}
+          >
             <a
               href='https://github.com/nrsimonelli'
               target='_blank'
               rel='noopener noreferrer'
             >
               <svg
-                width='36'
-                height='36'
+                width='30'
+                height='30'
                 viewBox='0 0 15 15'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
